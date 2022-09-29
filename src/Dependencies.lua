@@ -15,8 +15,9 @@ Class = require 'lib/class'
 -- a few global constants, centralized
 require 'src/constants'
 
--- class for the player's paddle
+-- class for the player's paddle and ball
 require 'src/Paddle'
+require 'src/Ball'
 
 -- file with utility functions
 require 'src/Util'
