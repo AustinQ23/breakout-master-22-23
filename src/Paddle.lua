@@ -19,15 +19,15 @@ function Paddle:update(dt)
   if love.keyboard.isDown('left') then
     self.dx = -PADDLE_SPEED
   elseif love.keyboard.isDown('right') then
-    self.dx = PADDLE_SPEED 
+    self.dx = PADDLE_SPEED
   else
     self.dx = 0
   end
 
   if self.dx < 0 then
-    self.x = math.max(0, self.x + self.x * dt)
-  else
-    self.x = math.min(VIRTUAL_WIDTH - self.width, self.x + self.x * dt)
+    self.x = math.max(0, self.x + self.dx * dt)
+  elseif self.dx > 0 then 
+    self.x = math.min(VIRTUAL_WIDTH - self.width, self.x + self.dx * dt)
   end
 end
 
