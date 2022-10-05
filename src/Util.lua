@@ -1,6 +1,6 @@
 function GenerateQuads(atlas, tilewidth, tileheight)
   local sheetWidth = atlas:getWidth() / tilewidth
-  local sheetHeight = atlast:getHeight() / tileheight
+  local sheetHeight = atlas:getHeight() / tileheight
 
   local sheetCounter = 1
   local spritesheet = {}
@@ -78,4 +78,8 @@ function GenerateQuadsBalls(atlas)
   end
 
   return quads
-end 
+end
+
+function GenerateQuadsBricks(atlas)
+  return table.slice(GenerateQuads(atlas, 32, 16), 1, 21)
+end

@@ -15,9 +15,13 @@ Class = require 'lib/class'
 -- a few global constants, centralized
 require 'src/constants'
 
--- class for the player's paddle and ball
+-- class for the player's paddle, ball, and bricks
 require 'src/Paddle'
 require 'src/Ball'
+require 'src/Brick'
+
+-- class used to generate layouts
+require 'src/LevelMaker'
 
 -- file with utility functions
 require 'src/Util'
