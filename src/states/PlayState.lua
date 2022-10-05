@@ -32,13 +32,49 @@ function PlayState:update(dt)
   self.ball:update(dt)
 
   if self.ball:collides(self.paddle) then
+    -- get ball outside paddle hitbox
+    self.ball.y = self.paddle.y - 8
+
     self.ball.dy = -self.ball.dy
+
+    -- adjust angle at which ball bounces off paddle
+    if self.ball.x < self.paddle.x + (self.paddle.width / 2) and self.paddle.dx < 0 then
+      self.ball.dx = -50 + -(8 * (self.paddle.x + self.paddle.width / 2 - self.ball.x))
+    elseif self.ball.x > self.paddle.x + (self.paddle.width / 2) and self.paddle.dx > 0 then
+      self.ball.dx = 50 + (8 * math.abs(self.paddle.x + self.paddle.width / 2 - self.ball.x))
+    end
+
     gSounds['paddle-hit']:play()
   end
 
   for k, brick in pairs(self.bricks) do
     if brick.inPlay and self.ball:collides(brick) then
       brick:hit()
+
+      -- handle collisions from each of the four sides
+      -- left edge
+      if self.ball.x + 2 < brick.x and self.ball.dx > 0 then
+        self.ball.dx = -self.ball.dx
+        self.ball.x = brick.x - 8
+      -- right edge
+      elseif self.ball.x + 6 > brick.x + brick.width and self.ball.dx < 0 then
+        self.ball.dx = -self.ball.dx
+        self.ball.x = brick.x + 32
+      -- top edge
+      elseif self.ball.y < brick.y then
+        self.ball.dy = -self.ball.dy
+        self.ball.y = brick.y - 8
+      -- bottom edge
+      else
+        self.ball.dy = -self.ball.dy
+        self.ball.y = brick.y + 16
+      end
+
+      -- scale up y velocity
+      self.ball.dy = self.ball.dy * 1.02
+
+      -- only allow one hit per brick
+      break
     end
   end
 
@@ -51,7 +87,7 @@ function PlayState:render()
   for k, brick in pairs(self.bricks) do
     brick:render()
   end
-  
+
   self.paddle:render()
   self.ball:render()
 
