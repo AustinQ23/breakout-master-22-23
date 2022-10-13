@@ -96,6 +96,9 @@ function love.load()
         ['music'] = love.audio.newSource('sounds/music.wav', 'static')
     }
 
+    gSounds['music']:play()
+    gSounds['music']:setLooping(true)
+
     -- the state machine we'll be using to transition between various states
     -- in our game instead of clumping them together in our update and draw
     -- methods
