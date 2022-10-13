@@ -112,7 +112,8 @@ function love.load()
         ['serve'] = function() return ServeState() end,
         ['game-over'] = function() return GameOverState() end,
         ['victory'] = function() return VictoryState() end,
-        ['high-scores'] = function() return HighScoreState() end
+        ['high-scores'] = function() return HighScoreState() end,
+        ['enter-high-score'] = function() return EnterHighScoreState() end
     }
     gStateMachine:change('start', {
       highScores = loadHighScores()
@@ -205,12 +206,12 @@ function love.draw()
 end
 
 function loadHighScores()
-  love.filesystem.setIdentity('breakout')
+  love.filesystem.setIdentity('breakout-master-22-23')
 
   if not love.filesystem.getInfo('breakout.lst') then
     local scores = ''
     for i = 10, 1, -1 do
-      scores = scores .. 'SLS\n'
+      scores = scores .. 'BAS\n'
       scores = scores .. tostring(i * 1000) .. '\n'
     end
 
