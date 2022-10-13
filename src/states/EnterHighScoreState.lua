@@ -26,7 +26,7 @@ function EnterHighScoreState:update(dt)
     end
 
     self.highScores[self.scoreIndex].name = name
-    self.highScores[self.scoreIndex].score = score
+    self.highScores[self.scoreIndex].score = self.score
 
     local scoresStr = ''
 

@@ -14,14 +14,14 @@ function PaddleSelectState:update(dt)
       gSounds['no-select']:play()
     else
       gSounds['select']:play()
-      self.currentPaddle = self.currentPaddle + 1
+      self.currentPaddle = self.currentPaddle - 1
     end
   elseif love.keyboard.wasPressed('right') then
     if self.currentPaddle == 4 then
       gSounds['no-select']:play()
     else
       gSounds['select']:play()
-      self.currentPaddle = self.currentPaddle - 1
+      self.currentPaddle = self.currentPaddle + 1
     end
   end
 
@@ -49,7 +49,7 @@ function PaddleSelectState:render()
   love.graphics.setFont(gFonts['small'])
   love.graphics.printf('Press Enter to continue!', 0, VIRTUAL_HEIGHT / 3, VIRTUAL_WIDTH, 'center')
 
-  if self.currentPaddle == 1 then 
+  if self.currentPaddle == 1 then
     love.graphics.setColor(40/255, 40/255, 40/255, 128/255)
   end
 
