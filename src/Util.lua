@@ -26,6 +26,10 @@ function table.slice(tbl, first, last, step)
   return sliced
 end
 
+
+
+
+
 function GenerateQuadsPaddles(atlas)
   local x = 0
   local y = 64

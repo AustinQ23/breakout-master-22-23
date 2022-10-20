@@ -50,6 +50,12 @@ function PlayState:update(dt)
     if brick.inPlay and self.ball:collides(brick) then
       self.score = self.score + (brick.tier * 200 + brick.color * 25)
 
+      if (0 == self.score % 1000) then
+        if self.paddle.size < 4 then
+          self.paddle.size = self.paddle.size + 1
+        end
+      end
+
       brick:hit()
 
       if self:checkVictory() then
@@ -98,6 +104,9 @@ function PlayState:update(dt)
   if self.ball.y >= VIRTUAL_HEIGHT then
     self.health = self.health - 1
     gSounds['hurt']:play()
+    if self.paddle.size > 1 then
+      self.paddle.size = self.paddle.size - 1
+    end
 
     if self.health == 0 then
       gStateMachine:change('game-over', {
